@@ -14,11 +14,13 @@ int main()
     array<int, 5> ar1{{3, 4, 5, 1, 2}};
     array<int, 5> ar2 = {1, 2, 3, 4, 5};
     array<string, 2> ar3 = {{string("a"), "b"}};
+    array<int, 10> ar4 = {4,32,5,3,25,6,3,2,7,4};
 
     cout << "Sizes of arrays are" << endl;
     cout << ar1.size() << endl;
     cout << ar2.size() << endl;
     cout << ar3.size() << endl;
+    cout << ar4.size() << endl;
 
     cout << "\nInitial ar1 : ";
     for (auto i : ar1)
@@ -42,6 +44,10 @@ int main()
     cout << "\nar3 : ";
     for (auto &s : ar3)
         cout << s << ' ';
+
+    cout<< "\nar4 : ";
+    for(auto i : ar4)
+        cout<< i << " ";
 
     return 0;
 }
