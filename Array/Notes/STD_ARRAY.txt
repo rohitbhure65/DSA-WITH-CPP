@@ -1,0 +1,25 @@
+STD::array in C++
+The array is a collection of homogeneous objects and this array container is defined for constant size arrays or (static size). This container wraps around fixed-size arrays and the information of its size are not lost when declared to a pointer. 
+In order to utilize arrays, we need to include the array header: 
+ 
+ #include <array> 
+
+This C++ STL array is a kind of sequential container and is not used extremely in regular programming or in competitive programming but sometimes its member function provides an upper edge to it over the regular normal array that we use in our daily life. So, we are discussing some of the important member function that is used with such kind of array:
+
+Syntax: array<object_type, arr_size> arr_name;
+
+a. [ ] Operator : This is similar to the normal array, we use it to access the element store at index ‘i’ .
+
+b. front( ) and back( ) function: These methods are used to access the first and the last element of the array directly.
+
+c. swap( ) function: This swap function is used to swap the content of the two arrays.
+
+d. empty( ) function: This function is used to check whether the declared STL array is empty or not, if it is empty then it returns true else false.
+
+e. at( ) function: This function is used to access the element stored at a specific location, if we try to access the element which is out of bounds of the array size then it throws an exception. 
+
+f. fill( ) function: This is specially used to initialize or fill all the indexes of the array with a similar value.
+
+g. size( ) or max_size( ) and sizeof( ) function: Both size( ) or max_size( ) are used to get the maximum number of indexes in the array while sizeof( ) is used to get the total size of array in bytes.
+
+h. data( ): This function returns the pointer to the first element of the array object. Because elements in the array are stored in contiguous memory locations. This data( ) function return us the base address of the string/char type object.
