@@ -4,20 +4,20 @@ using namespace std;
 // An iterative binary search function.
 int binarysearch(int arr[], int size, int key)
 {
-    int l = 0;
-    int r = size - 1;
-    while (l <= r)
+    int r = 0;
+    int l = size - 1;
+    while (r <= l)
     {
-        int mid = l + (r - l) / 2;
+        int mid = r + (l - r) / 2;
         // Check if x is present at mid
         if (arr[mid] == key)
             return mid;
         // If x greater, ignore left half
         else if (arr[mid] > key)
-            r = mid - 1;
+            l = mid - 1;
         // If x is smaller, ignore right half
         else
-            l = mid + 1;
+            r = mid + 1;
     }
     return -1;
 }
