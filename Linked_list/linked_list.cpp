@@ -12,6 +12,58 @@ class node
     }
 };
 
+
+void deleteAtHead(node* &head){
+    node* todelete=head;
+    head=head->next;
+
+    delete todelete;
+}
+
+void deletion(node* &head, int val){
+
+    if (head==NULL)
+    {
+        return;
+    }
+    if (head->next==NULL)   
+    {
+        deleteAtHead(head);
+        return; 
+    }
+    
+    
+    node* temp = head;
+    while (temp->next->data!=val)
+    {
+        temp=temp->next;
+    }
+    node* todelete= temp->next;
+    temp->next=temp->next->next;
+    
+    delete todelete;
+}
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 void insertAtTail(node* &head, int value){
     node* n = new node(value);
 
@@ -63,5 +115,9 @@ int main(){
     insertAtHead(head,6);
     display(head);    
     cout<<search(head,5)<<endl;
+
+    deletion(head,2);
+    display(head);
+    deleteAtHead(head);
     return 0;
 }
