@@ -12,8 +12,14 @@ struct node {
 struct node* insertAtHead(struct node **head, int data) {
     struct node *newNode = (struct node *)malloc(sizeof(struct node)); // Allocate memory for the new node
     newNode->data = data;  // Set the data of the new node
-    newNode->next = *head; // Point the new node's next to the current head
-    *head = newNode;       // Update the head to the new node
+    newNode->next = NULL;  // set as end of list
+    if (*head==NULL){      // then list empty, so set a head node
+        *head=newNode;
+        (*head)->next=NULL;
+    }else{                 // else add to left of list
+        newNode->next= *head;
+        *head = newNode;   // Update the head to the new node
+    }
     printf("Insert a Node at the Beginning of Linked List\n");
 }
 
@@ -45,9 +51,8 @@ struct node* insertAtindex(struct node **head, int data, int index) {
         newNode->next = NULL;        // Initialize the new node's next to NULL
 
         struct node *cur = *head;    // Temporary pointer to traverse the list
-        for (int i = 0; i < index - 1 && cur != NULL; i++) { // Traverse to the position before the insertion point
-            cur = cur->next;
-        }
+        while(--index && cur!=NULL) // Traverse to the position before the insertion point
+                cur = cur->next;
 
         if (cur == NULL) {           // If index is out of bounds, insert at the end
             insertAtEnd(head, data);
@@ -74,18 +79,17 @@ void *deletefirst(struct node **head) {
 // Deleting the last Node in Singly Linked List
 void *deletelast(struct node **head) {
     struct node *temp = NULL, *curr = *head;
-    if (*head == NULL) {
+    if (*head == NULL)
         return *head;               // If the list is empty, return
-    }
     while (curr->next) {            // Traverse to the last node
         temp = curr;
         curr = curr->next;
     }
-    if (temp != NULL) {             // If the list has more than one node
+    if (temp != NULL)               // If the list has more than one node
         temp->next = NULL;          // Set the second last node's next to NULL
-    } else {
+    else 
         *head = NULL;               // If the list has only one node, set head to NULL
-    }
+    
     free(curr);                     // Free the last node
     printf("Deleting the last Node in Singly Linked List\n");
 }
@@ -100,11 +104,13 @@ void *deleteNode(struct node **head, int position) {
     if (position == 0) {
         *head = temp->next;         // Update the head if the position is 0
         free(temp);                 // Free the old head node
+        // deletefirst(head);
         return *head;
     }
-    for (int i = 0; temp != NULL && i < position - 1; i++) { // Traverse to the node before the position
+
+    while(--position && temp!=NULL) // Traverse to the node before the position
         temp = temp->next;
-    }
+    
     if (temp == NULL || temp->next == NULL)
         return *head;               // If position is out of bounds, return
     struct node *next = temp->next->next; // Temporary pointer to hold the next node
