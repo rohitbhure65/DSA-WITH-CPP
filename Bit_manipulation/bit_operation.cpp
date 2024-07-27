@@ -28,10 +28,18 @@ int clearbit(int n, int pos) {
     return (n & mask);
 }
 
-int updatebit(int n, int pos, int value){
-    int mask = ~(1<< pos);
+// Function to update the bit at a specific position with a given value (0 or 1)
+// Example: N = 0101 (which is 5 in decimal), pos = 1, value = 1
+// Step 1: Create a mask to clear the bit at position 'pos'
+// ~(1 << pos) = ~(0010) = 1101
+// 0101 & 1101 = 0101
+// Step 2: Shift the value to the correct position and OR it with the cleared number
+// value << pos = 1 << 1 = 0010
+// 0101 | 0010 = 0111
+int updatebit(int n, int pos, int value) {
+    int mask = ~(1 << pos);
     n = n & mask;
-    return n | (value<<pos);
+    return n | (value << pos);
 }
 
 int main() {
@@ -44,6 +52,8 @@ int main() {
     // Testing clearbit function: clear the bit at position 2 of number 5
     cout << clearbit(5, 2) << endl; // Output: 1
 
-    cout << updatebit(5,1,1) << endl;
+    // Testing updatebit function: update the bit at position 1 of number 5 to 1
+    cout << updatebit(5, 1, 1) << endl; // Output: 7
+
     return 0;
 }
