@@ -124,6 +124,52 @@ void deleteFirstNode(struct node **head) {
     return;
 }
 
+// Delete the Give node in Doubly Linked List
+void deleteAtPosition(struct node **head, int position) {
+    if (*head == NULL) {  // Check if the list is empty
+        printf("List is empty!\n");
+        return;
+    }
+
+    struct node *temp = *head;  // Pointer to traverse the list
+
+    // If the position is 0, delete the head node
+    if (position == 0) {
+        *head = temp->next;  // Update the head to the next node
+        if (*head != NULL) {
+            (*head)->prev = NULL;  // Update the prev pointer of the new head to NULL
+        }
+        free(temp);  // Free the memory of the old head
+        printf("Deleted node at position %d\n", position);
+        return;
+    }
+
+    // Traverse the list to find the node at the given position
+    for (int i = 0; temp != NULL && i < position-1; i++) {
+        temp = temp->next;
+    }
+
+    // If the position is out of bounds
+    if (temp == NULL) {
+        printf("Position out of bounds!\n");
+        return;
+    }
+
+    // If the node to be deleted is not the last node
+    if (temp->next != NULL) {
+        temp->next->prev = temp->prev;
+    }
+
+    // If the node to be deleted is not the first node
+    if (temp->prev != NULL) {
+        temp->prev->next = temp->next;
+    }
+
+    free(temp);  // Free the memory of the node to be deleted
+    printf("Deleted node at position %d\n", position);
+}
+
+
 // Delete the tail node in Doubly Linked List
 void deleteLastNode(struct node **head) {
     struct node *temp = *head, *curr = *head; // Create pointers to traverse the list
@@ -188,5 +234,8 @@ int main() {
     deleteLastNode(&head); // Delete the last node
     display(head);  // Display the list
 
+    deleteAtPosition(&head, 2); // Delete at position
+    display(head);  // Display the list
+    
     return 0;  // Exit the program
 }
