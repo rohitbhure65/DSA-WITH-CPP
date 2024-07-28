@@ -16,7 +16,7 @@ void swap_reference(int &a, int &b){
 };
 
 // function with pointer
-void swap(int *a, int *b) {
+void swap_pointers(int *a, int *b) {
     int temp = *a;
     *a = *b;
     *b = temp;
@@ -30,6 +30,6 @@ int main(){
     int y = 80;
     swap_value(a, b);     // call by value
     swap_reference(a, b); // call by reference
-    swap(&x, &y);         // function with pointer
+    swap_pointers(&x, &y);         // function with pointer
     return 0;
 }
