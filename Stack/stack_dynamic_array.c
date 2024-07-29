@@ -1,21 +1,23 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define MAX 40 // Define the maximum size of stack
-
-typedef struct Stack {
+struct Stack {
     int top; // Index of the top element in the stack
-    int array[MAX]; // Array to store stack elements
+    int capacity; // Capacity of the stack
+    int *array; // Dynamic array to store stack elements
 };
 
 // Function to initialize the stack
-void initStack(struct Stack **s) {
+void initStack(struct Stack **s, int capacity) {
+    *s = (struct Stack *)malloc(sizeof(struct Stack)); // Allocate memory for the stack
+    (*s)->capacity = capacity; // Set the initial capacity
     (*s)->top = -1; // Set top to -1 indicating stack is empty
+    (*s)->array = (int *)malloc((*s)->capacity * sizeof(int)); // Allocate memory for the dynamic array
 }
 
 // Function to check if the stack is full
 int isFull(struct Stack *s) {
-    return s->top == MAX - 1; // Stack is full if top index is at MAX-1
+    return s->top == s->capacity - 1; // Stack is full if top index is at capacity-1
 }
 
 // Function to check if the stack is empty
@@ -23,11 +25,16 @@ int isEmpty(struct Stack *s) {
     return s->top == -1; // Stack is empty if top index is at -1
 }
 
+// Function to resize the stack's array when it is full
+void resize(struct Stack *s) {
+    s->capacity *= 2; // Double the capacity
+    s->array = (int *)realloc(s->array, s->capacity * sizeof(int)); // Reallocate memory for the new capacity
+}
+
 // Function to push an element to the stack
 void push(struct Stack **s, int data){
     if (isFull(*s)){ // Check if the stack is full
-        printf("Stack Overflow\n"); // Print overflow message
-        return; // Exit the function
+        resize(*s); // Resize the stack
     }
     (*s)->array[++(*s)->top] = data; // Increment top and push data to stack
     printf("%d PUSH TO STACK\n", data); // Print push message
@@ -50,6 +57,7 @@ int peek(struct Stack **s){
         return -1; // Return -1 to indicate failure
     }
     printf("%d is Peek Element\n", (*s)->array[(*s)->top]); // Print top element
+    return (*s)->array[(*s)->top]; // Return the top element
 }
 
 // Function to display the stack elements
@@ -65,16 +73,12 @@ void display(struct Stack *s) {
 }
 
 int main() {
-    // Allocate memory for the stack
-    struct Stack *s = (struct Stack *)malloc(sizeof(struct Stack));
-    
-    if (s == NULL) { // Check if memory allocation failed
-        printf("Memory allocation failed\n"); // Print failure message
-        return 1; // Exit with error code
-    }
+    int initialCapacity = 5; // Initial capacity of the stack
+    struct Stack *s;
 
     // Initialize the stack
-    initStack(&s);
+    initStack(&s, initialCapacity);
+
     push(&s, 1); // Push 1 to stack
     push(&s, 2); // Push 2 to stack
     push(&s, 3); // Push 3 to stack
@@ -87,6 +91,7 @@ int main() {
     display(s); // Display stack elements
 
     // Free allocated memory
-    free(s);
+    free(s->array); // Free the dynamic array
+    free(s); // Free the stack structure
     return 0; // Return 0 to indicate successful execution
 }
