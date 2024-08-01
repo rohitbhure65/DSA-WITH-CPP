@@ -2,8 +2,7 @@
 #include <stdlib.h>     // Standard library for malloc and free functions
 #include <limits.h>     // Defines constants for integer limits (not used in this code but included)
 
-typedef struct Queue
-{
+typedef struct Queue{
     int front, rear;   // Indices for the front and rear of the queue
     int capacity;      // Maximum number of elements the queue can hold
     int size;          // Current number of elements in the queue
@@ -75,11 +74,63 @@ void enQueue(struct Queue *Q, int data)
         Q->front = Q->rear;    // Set the front index to the rear index
 
     Q->size += 1;  // Increment the size of the queue
+    printf("Enqueued element : %d\n", data); // print the Enqueued element
+}
+
+int deQueue(struct Queue *Q){
+    int data = INT_MIN;
+    if(isEmpty(Q)){  // Check if the queue is empty
+        printf("Queue is Empty\n");
+        return data;  // Return INT_MIN if the queue is empty
+    }
+    data = Q->array[Q->front];  // Get the front element of the queue
+    if(Q->front == Q->rear){  // If the queue has only one element
+        Q->front = Q->rear = -1;  // Reset front and rear
+        Q->size = 0;  // Reset size to 0
+    } else {
+        Q->front = (Q->front + 1) % Q->capacity;  // Move front to the next element
+        Q->size -= 1;  // Decrease the size of the queue
+    }
+    printf("Dequeued element is : %d\n", data);  // Print the dequeued element
+    return data;  // Return the dequeued element
+}
+
+void deleteQueue(struct Queue *Q){
+    if(Q){  // Check if the queue is not NULL
+        if(Q->array){  // Check if the array is not NULL
+            free(Q->array);  // Free the memory allocated for the array
+        }
+        free(Q);  // Free the memory allocated for the queue
+    }
 }
 
 int main()
 {
     struct Queue *Q = createQueue(4);  // Create a queue with a capacity of 4 elements
-    enQueue(Q, 1);                     // Add the element '1' to the queue
-    return 0;                          // Return 0 to indicate successful execution
+
+    enQueue(Q, 1);  // Add the element '1' to the queue
+    enQueue(Q, 2);  // Add the element '2' to the queue
+    enQueue(Q, 3);  // Add the element '3' to the queue
+    enQueue(Q, 4);  // Add the element '4' to the queue
+    
+    printf("Size of Queue: %d\n", size(Q));  // Print the size of the queue
+    printf("Front element is : %d\n", frontElement(Q));  // Print the front element
+    printf("Rear element is : %d\n", rearElement(Q));  // Print the rear element
+
+    deQueue(Q);  // Remove the front element from the queue
+    deQueue(Q);  // Remove the front element from the queue
+    deQueue(Q);  // Remove the front element from the queue
+    deQueue(Q);  // Remove the front element from the queue
+    deQueue(Q);  // Attempt to remove an element from an empty queue
+
+    enQueue(Q, 15);  // Add the element '15' to the queue
+    enQueue(Q, 100);  // Add the element '100' to the queue
+    enQueue(Q, 150);  // Add the element '150' to the queue
+
+    printf("Size of Queue : %d\n", size(Q));  // Print the size of the queue
+    printf("Front element is : %d\n", frontElement(Q));  // Print the front element
+    printf("Rear element is : %d\n", rearElement(Q));  // Print the rear element
+
+    deleteQueue(Q);  // Delete the queue and free the allocated memory
+    return 0;  // Return 0 to indicate successful execution
 }
