@@ -1,1 +1,1 @@
-<img src="/coder.gif" alt="DSA coding practice">
+<img src="/DSA_ROADMAP.svg" alt="DSA coding practice">
