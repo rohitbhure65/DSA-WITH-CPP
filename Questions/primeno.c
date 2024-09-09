@@ -1,16 +1,12 @@
 #include<stdio.h>
 
-int main(){
-    int n, flag = 0;
-
-    printf("Enter the no\n");
-    scanf("%d", &n);
-
-    if(n==0 | n==1){
+void is_prime(int n){
+    int flag = 0;
+    if(n==0 || n==1){
         flag = 1;
     }
 
-    for (int i = 2; i < n/2; ++i)
+    for (int i = 2; i <= n/2; ++i)
     {
         if (n%i==0)
         {
@@ -25,5 +21,12 @@ int main(){
     }else{
         printf("%d is not a prime no\n", n);
     }   
-    return 0;
+}
+
+int main(){
+    int n;
+
+    printf("Enter the no\n");
+    scanf("%d", &n);
+    is_prime(n);
 }
