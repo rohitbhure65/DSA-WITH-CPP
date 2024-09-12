@@ -62,7 +62,7 @@ int main(){
     s1->id = 2;
     cout << "using Heap Allocation with new keyword\n" << s1->id << endl;
 
-    delete s1;
+    delete s1; // ● Delete is used to release a unit of memory, delete[] is used to release an array.
 
     return 0;
 }
