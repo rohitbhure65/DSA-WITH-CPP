@@ -1,7 +1,6 @@
-#include <stdio.h>
+#include<stdio.h>
 
-int main()
-{
+int main(){
     int row;
 
     printf("Enter a no\n");
@@ -9,17 +8,18 @@ int main()
 
     for (int i = 0; i < row; i++)
     {
-        // printf("%d", 2 * (row - i) - 1);
-        for (int j = 0; j < 2 * (row - i) - 1; j++)
+        // printf("%d", row-i);
+        for (int j = 0; j < row - i ; j++)
         {
             printf(" ");
         }
         for (int k = 0; k <= i; k++)
         {
-            printf("* ");
+           printf("* ");
         }
         printf("\n");
+        
     }
-
+    
     return 0;
 }
