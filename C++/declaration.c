@@ -1,5 +1,5 @@
-#include<stdio.h>
-#include<string.h>
+#include <stdio.h>
+#include <string.h>
 // USING #define PREPROCESSER
 #define PI 3.14
 #define NEWLINE '\n'
@@ -11,7 +11,15 @@ int globalvariable = 10;
 
 int main()
 {
-    // USING CONST KEYWORD
+
+    // Data Modifers
+
+    // Modify the default size of primitive data type.
+    // 1 signed
+    // 2 unsigned
+    // 3 short
+    // 4 long
+
     // 1 Byte -> 8 bits
     short int area = 43;
     unsigned short int aera = 32;
@@ -26,8 +34,6 @@ int main()
     printf("%d \n", size);
     printf("%f \n", pi);
     printf("%c \n", name);
-    // for 
     printf("%d\n", globalvariable);
     return 0;
 }
-
