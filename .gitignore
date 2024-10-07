@@ -1,7 +1,1 @@
-# Ignore all files and folders
-*
 
-# Accept only .c, .cpp, and .pdf files in subfolders
-!*/*.c
-!*/*.cpp
-!*/*.pdf
