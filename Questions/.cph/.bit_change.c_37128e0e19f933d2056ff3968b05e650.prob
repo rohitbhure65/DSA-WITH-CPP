@@ -1,0 +1,1 @@
+{"name":"Local: bit_change","url":"/home/kali/Desktop/DSA-WITH-CPP/Questions/bit_change.c","tests":[{"id":1731738215902,"input":"13\n14","output":"2"},{"id":1731738298817,"input":"14\n35","output":"2"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/home/kali/Desktop/DSA-WITH-CPP/Questions/bit_change.c","group":"local","local":true}
