@@ -16,14 +16,14 @@ int main() {
         reminder = number % 10;
         
         // Add the digit to the reversed number
-        // For example, if the original number is 123, 
+        // For example, if the original number is 123,
         // after the first iteration, sum will be 3,
         // after the second iteration, sum will be 32,
         // and after the third iteration, sum will be 321.
         sum = reminder + sum * 10;
         
         // Remove the last digit from the number
-        number = number / 10; 
+        number = number / 10;
     }
 
     // Compare the original number (copy) with the reversed number (sum)
